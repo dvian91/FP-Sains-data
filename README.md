@@ -15,15 +15,25 @@ sex: jenis kelamin
 cp: tipe nyeri dada
 
 trestbps: tekanan darah saat istirahat
+
 chol: kadar kolesterol
+
 fbs: gula darah puasa
+
 restecg: hasil EKG saat istirahat
+
 thalach: detak jantung maksimum
+
 exang: angina karena olahraga
+
 oldpeak: depresi segmen ST
+
 slope: kemiringan segmen ST
+
 ca: jumlah pembuluh darah utama
+
 thal: kondisi thalassemia
+
 condition: kondisi jantung (sakit/tidak)
 
 # Modeling
