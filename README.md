@@ -9,8 +9,11 @@ Membangun sebuah sistem prediksi yang dapat membantu dalam mendeteksi risiko pen
 # Deksripsi Data
 Dataset ini terdiri dari:
 age: usia
+
 sex: jenis kelamin
+
 cp: tipe nyeri dada
+
 trestbps: tekanan darah saat istirahat
 chol: kadar kolesterol
 fbs: gula darah puasa
