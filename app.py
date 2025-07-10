@@ -2,8 +2,8 @@ import streamlit as st
 import numpy as np
 import pickle
 
-# Load model
 analisis_model = pickle.load(open('model_prediksi.sav', 'rb'))
+scaler = pickle.load(open('scaler_prediksi.sav', 'rb'))
 
 st.set_page_config(page_title="Deteksi Penyakit Jantung", layout="centered")
 
@@ -25,8 +25,7 @@ slope = st.selectbox("Slope Segmen ST", [0, 1, 2])
 ca = st.selectbox("Jumlah Pembuluh yang Diberi Warna", [0, 1, 2, 3, 4])
 thal = st.selectbox("Thal", [0, 1, 2, 3])
 
-# Konversi input ke format model
-input_data = np.array([[
+input_data = np.array([[ 
     age,
     1 if sex == "Pria" else 0,
     cp,
@@ -42,15 +41,16 @@ input_data = np.array([[
     thal
 ]])
 
-# Prediksi saat tombol diklik
+scaled_input = scaler.transform(input_data)
+
 if st.button("Prediksi"):
-    prediction = analisis_model.predict(input_data)[0]
-    probability = analisis_model.predict_proba(input_data)[0][1]
+    prediction = analisis_model.predict(scaled_input)[0]
+    probability = analisis_model.predict_proba(scaled_input)[0][1] * 100
 
     if prediction == 1:
-        st.error(f"⚠️ Pasien berisiko mengalami penyakit jantung")
+        st.error(f"⚠ Pasien berisiko mengalami penyakit jantung.\n\nRisiko sebesar *{probability:.2f}%*.")
     else:
-        st.success(f"✅ Pasien kemungkinan *tidak* mengalami penyakit jantung")
+        st.success(f"✅ Pasien kemungkinan tidak mengalami penyakit jantung.\n\nRisiko sebesar *{probability:.2f}%*.")
 
 st.markdown("---")
 st.caption("Model ini digunakan untuk tujuan edukasi dan bukan sebagai pengganti diagnosis medis.")
